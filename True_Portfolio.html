@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POP PUNK PORTFOLIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rock+Salt&family=VT323&family=Abril+Fatface&family=Raleway:ital,wght@0,400;0,900;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="PKP_Essentials/style.css">
+</head>
+<body>
+
+<!-- Persistent background audio — src must live next to this HTML file -->
+<audio id="bg-audio" src="Assets/bg.mp3" loop preload="auto"></audio>
+
+<!-- Audio toggle — fixed bottom-left -->
+<button id="audio-toggle" class="muted" aria-label="Toggle music">
+  <span class="audio-icon">♪</span>
+  <span class="pulse-dot"></span>
+  <span class="audio-label">CLICK TO PLAY</span>
+</button>
+
+<div class="intro-overlay">
+  <div class="count-box">
+    <span class="count c1">UNO.</span>
+    <span class="count c2">DOS.</span>
+    <span class="count c3">TRE!</span>
+  </div>
+</div>
+
+<!-- ── TOP NAVBAR ── -->
+<nav class="punk-nav">
+  <a href="#top" class="punk-nav-logo">☠ Computyshan</a>
+  <ul class="punk-nav-links">
+    <li><a href="#top">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div id="palette-triangle" class="punk-nav-triangle" role="button" tabindex="0" title="Swap colour palette" aria-label="Cycle colour palette"></div>
+</nav>
+
+<div class="vinyl-nav" data-tooltip="CLICK TO MUTE">
+  <!-- SVG disc spins independently -->
+  <div class="vinyl-record">
+    <svg class="vinyl-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer record body -->
+      <circle cx="150" cy="150" r="148" fill="#0a0a0a"/>
+      <!-- Vinyl groove rings -->
+      <circle cx="150" cy="150" r="145" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="141" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="137" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="133" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="129" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="125" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="121" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="117" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="113" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="109" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="105" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <circle cx="150" cy="150" r="101" fill="none" stroke="#222" stroke-width="0.4"/>
+      <circle cx="150" cy="150" r="97" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <!-- Shiny groove shimmer arc -->
+      <path d="M 80 60 A 90 90 0 0 1 220 60" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="18"/>
+      <!-- Label area -->
+      <circle cx="150" cy="150" r="60" fill="#111317"/>
+      <circle cx="150" cy="150" r="60" fill="none" stroke="#c8160f" stroke-width="2.5"/>
+      <!-- Label inner ring -->
+      <circle cx="150" cy="150" r="56" fill="none" stroke="rgba(200,22,15,0.3)" stroke-width="0.5"/>
+      <!-- Label band stripes -->
+      <rect x="90" y="130" width="120" height="8" fill="#c8160f" opacity="0.9"/>
+      <rect x="90" y="162" width="120" height="8" fill="#c8160f" opacity="0.9"/>
+      <!-- Label title text -->
+      <text x="150" y="148" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="13" fill="#f8e71c" letter-spacing="4">SIGA.DEV</text>
+      <!-- Label sub text -->
+      <text x="150" y="175" text-anchor="middle" font-family="'VT323', monospace" font-size="9" fill="rgba(240,244,248,0.6)" letter-spacing="3">POP PUNK PORTFOLIO</text>
+      <!-- Small catalog number -->
+      <text x="150" y="195" text-anchor="middle" font-family="'VT323', monospace" font-size="8" fill="rgba(240,244,248,0.35)" letter-spacing="2">SPD-182 ✦ 45 RPM</text>
+      <!-- Spindle hole -->
+      <circle cx="150" cy="150" r="5" fill="#111317" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <!-- Highlight gloss sheen -->
+      <ellipse cx="105" cy="95" rx="30" ry="12" fill="rgba(255,255,255,0.025)" transform="rotate(-30 105 95)"/>
+    </svg>
+  </div>
+  <!-- Links overlay — never rotates, always on top -->
+  <div class="vinyl-links">
+    <a href="#about"   class="v-link v-about">ABOUT</a>
+    <a href="#work"    class="v-link v-work">WORK</a>
+    <a href="#contact" class="v-link v-contact">CONTACT</a>
+    <button id="vinyl-next" aria-label="Next song">&#9654;&#9654;</button>
+    <div id="vinyl-track-label"></div>
+  </div>
+</div>
+
+<header class="hero" id="top">
+
+  <div class="hero-left">
+   <div class="ransom-name">
+  <span class="r-word" style="margin-bottom:0.20em">
+    <span class="r-letter style-a">T</span>
+    <span class="r-letter style-b">y</span>
+    <span class="r-letter style-f">s</span>
+    <span class="r-letter style-d">h</span>
+    <span class="r-letter style-e">a</span>
+    <span class="r-letter style-f">u</span>
+    <span class="r-letter style-g">n</span>
+  </span>
+  <span class="r-word" style="margin-top:0.35em">
+    <span class="r-letter style-h">S</span>
+    <span class="r-letter style-f">i</span>
+    <span class="r-letter style-c">g</span>
+    <span class="r-letter style-b">A</span>
+  </span>
+</div>
+
+    <span class="hero-eyebrow">// available for collaborations //</span>
+    <p class="hero-tagline">Designer &amp; Developer, Punk Rock lover. I aspire to build things to change the world, the way music did to mine.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-stamp">See My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+
+    <!-- CASSETTE CARD — Currently Spinning -->
+    <div class="cassette-card card-hover-preview">
+      <div class="cassette-shell">
+        <div class="cassette-reels">
+          <div class="reel"></div>
+          <div class="cassette-window"></div>
+          <div class="reel"></div>
+        </div>
+        <div class="cassette-label">
+          <span class="cassette-label-title">▶ Currently On:</span>
+          <span class="cassette-label-value">Duyog: Localized Hospital Assistance System for Patients</span>
+        </div>
+        <div class="cassette-bottom">
+          <div class="screw"></div>
+          <div class="screw"></div>
+          <div class="screw"></div>
+        </div>
+      </div>
+      <div class="preview-overlay" style="background-image:url('Assets/Images/Duyog landing.png')"></div>
+    </div>
+
+    <!-- SETLIST STUB — On Queue -->
+    <div class="setlist-stub card-hover-preview">
+      <div class="stub-inner">
+        <div class="stub-header">
+          <!-- inline SVG safety pin -->
+          <svg class="stub-pin" width="30" height="50" viewBox="0 0 22 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="6" r="5" stroke="#333" stroke-width="2" fill="none"/>
+            <circle cx="11" cy="6" r="2" fill="#555"/>
+            <line x1="11" y1="11" x2="11" y2="30" stroke="#333" stroke-width="2"/>
+            <circle cx="11" cy="32" r="5" stroke="#333" stroke-width="2" fill="#ddd"/>
+          </svg>
+          <span class="stub-label">On Queue</span>
+        </div>
+        <span class="stub-value">Upalengke: UP MIN's own e-commerce platform →</span>
+        <div class="stub-barcode">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="preview-overlay" style="background-image:url('Assets/Images/UPALENGKE.png')"></div>
+    </div>
+
+    <div class="sticker-badge" aria-hidden="true">
+      <span style="color:var(--ink)">ISKX<br>...</span>
+      <span style="color:var(--ink)">60160</span>
+    </div>
+
+    <!-- ── PINNED STICKER BADGES ── -->
+    <div class="sticker-pin sticker-red"   style="width:90px;height:90px;top:1.2rem;left:1.5rem;transform:rotate(-14deg);">
+      <span style="font-size:0.5rem;">EST.</span>
+      <span style="font-size:1.4rem;">NO<br>RULES</span>
+    </div>
+    <div class="sticker-pin sticker-blue"  style="width:100px;height:100px;bottom:5rem;left:2rem;transform:rotate(12deg);">
+      <span style="font-size:0.45rem;">BASED IN</span>
+      <span style="font-size:1.1rem;">DAVAO<br>CITY</span>
+    </div>
+    <div class="sticker-pin sticker-green" style="width:115px;height:115px;top:38%;right:150px;transform:rotate(-8deg);">
+      <span style="font-size:0.45rem;">MOTTO</span>
+      <span style="font-size:1.15rem;">DIY<br>OR DIE</span>
+    </div>
+    <div class="sticker-pin sticker-ink"   style="width:78px;height:78px;bottom:1.5rem;right:195px;transform:rotate(18deg);">
+      <span style="font-size:0.42rem;color:var(--orange);">BUILD</span>
+      <span style="font-size:1.2rem;color:var(--orange);">v2.026</span>
+    </div>
+    <!-- top-right gap: between NO RULES (left ~105px) and vinyl zone (right 200px+) -->
+    <div class="sticker-pin" style="width:88px;height:88px;top:1rem;right:150px;transform:rotate(10deg);background:var(--orange);color:var(--ink);border-color:var(--ink);animation-delay:1.2s;">
+      <span style="font-size:0.42rem;">CLASS OF</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;line-height:1;margin-top:3px;">2026</span>
+    </div>
+
+  </div>
+
+</header>
+
+<div class="tear-down"></div>
+
+<section id="about" class="about-bg">
+  <div class="about-inner">
+    <div class="about-photo-wrap reveal-left">
+      <div class="photo-placeholder"> <a href="Assets/Images/Second_pic.jpg" target="_blank"></a></div>
+      <div class="photo-shadow"></div>
+    </div>
+    <div class="about-text-col reveal-right">
+      <h3>// About Me  ( Again? )</h3>
+      <p>I'm a designer and developer who grew up staring at CD liner notes. Learned to code to customize my Myspace profile, and never stopped treating the screen like an empty skatepark.</p>
+      <p>Based in Davao City. Just graduated from Highschool and now a freshman at the University of the Philippines - Mindanao. An independent student programmer making stuff for fun.</p>
+      <p>I care about contrast. About attitude. About the feeling when a website doesn't act the way it's supposed to.</p>
+      <div class="skill-stamps">
+        <span class="stamp">AI Dev</span><span class="stamp">Project Management</span><span class="stamp">Motion Graphics Editor</span><span class="stamp">Figma</span><span class="stamp">Video</span><span class="stamp">Print</span><span class="stamp">Illustrations</span><span class="stamp">Branding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear-up"></div>
+
+<section id="work" class="work-section">
+  <div class="work-inner">
+    <div class="section-label">
+      <span class="section-num">// 02</span><h2 class="section-title"><span class="glitch-wrap" data-text="My Greatest Hits (Sort of)"> My Greatest Hits (Sort of)</span></h2>
+    </div>
+    <div class="featured-row reveal">
+      <span class="featured-tag">★ GRAPHICS SECTION</span>
+      <div class="featured-thumb"></div>
+      <div class="featured-info">
+        <div>
+          <div class="proj-tags"><span class="proj-tag">Motion Graphics</span>&nbsp;&nbsp;<span class="proj-tag">Web</span>&nbsp;&nbsp;<span class="proj-tag">Pubmats</span></div>
+          <div class="proj-title">The Graphscape</div>
+          <p class="proj-desc">My collection of publication materials and motion graphics through the years volunteering as a creatives member through various organizations and events.</p>
+        </div>
+        <a href="https://drive.google.com/drive/folders/199BhSTnMSvJsJFWLM52iCEdHb_De28VN?usp=sharing" class="proj-link" target="_blank">Take a look for yourself! →</a>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="proj-card reveal" style="transition-delay:0s">
+        <div class="card-thumb-area thumb-tmbg"></div>
+        <div class="card-content">
+          <div class="card-proj-tags"><span class="card-proj-tag">Game Dev · Flutter· Mobile</span></div>
+          <div class="card-proj-title">Chess Game on Flutter</div>
+          <div class="card-proj-title"> (Head Developer)</div>
+          <p class="card-proj-desc">Started as a submission entry for a school org, ended as an experimental project focusing on logic, 2D arrays, and basic 2D game logic.</p>
+          <a href="#" class="proj-link" style="font-size:0.85rem;">View Project →</a>
+        </div>
+      </div>
+      <div class="proj-card reveal" style="transition-delay:0.1s">
+        <div class="card-thumb-area thumb-sr71"></div>
+        <div class="card-content">
+          <div class="card-proj-tags"><span class="card-proj-tag">Fullstack · JS · AI</span></div>
+          <div class="card-proj-title">ULTrack</div>
+          <div class="card-proj-title"> (Co-Founder, AI Developer)</div>
+          <p class="card-proj-desc">An all out student productivity web application designed to help users manage their tasks and improve focus.</p>
+          <a href="https://ultrack.site" class="proj-link" style="font-size:0.85rem;" target="_blank">View Project →</a>
+        </div>
+      </div>
+      <div class="proj-card reveal" style="transition-delay:0.2s">
+        <div class="card-thumb-area thumb-blink"></div>
+        <div class="card-content">
+          <div class="card-proj-tags"><span class="card-proj-tag">Fullstack · AI</span></div>
+          <div class="card-proj-title">Duyog</div>
+          <div class="card-proj-title"> (Project Lead, AI Developer)</div>
+          <p class="card-proj-desc">A localized hospital assistance system for patients, designed to improve accessibility and communication for filipino patients.</p>
+          <a class="proj-link" style="font-size:0.85rem;" target="_blank">*Coming Soon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear-down" style="background: var(--red);"></div>
+
+<section id="contact" class="contact-bg">
+  <div style="height:20px;"></div>
+  <div class="contact-inner">
+    <div class="contact-left reveal-left">
+      <div class="section-label">
+        <span class="section-num" style="color:rgba(0,0,0,0.5)">// 03</span><h2 class="section-title" style="color:var(--ink); border-color:var(--ink);"><span class="glitch-wrap" data-text="Encore">Encore</span></h2>
+      </div>
+      <span class="contact-blurb">Need a hand<br>on a project?</span>
+      <a href="mailto:tyshaunlouissiga@gmail.com" class="contact-email">tyshaunlouissiga@gmail.com</a>
+      <div class="social-lines">
+        <a href="https://github.com/Computyshan" class="social-line" target="_blank">github.com/Computyshan</a>
+        <a href="https://www.facebook.com/tyshaun.siga/" class="social-line" target="_blank">facebook.com/tyshaun.siga</a>
+        <a href="https://www.instagram.com/green_tysh/" class="social-line" target="_blank">instagram.com/green_tysh</a>
+      </div>
+    </div>
+    <form class="contact-form reveal-right" onsubmit="handleSubmit(event)">
+      <div class="field-group">
+        <label class="field-label" for="fn">Your Name</label>
+        <input class="field-input" type="text" id="fn" placeholder="First Last" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="fe">Email</label>
+        <input class="field-input" type="email" id="fe" placeholder="you@domain.com" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="fm">The Project</label>
+        <textarea class="field-textarea" id="fm" placeholder="Tell me about it..." required></textarea>
+      </div>
+      <button type="submit" class="btn-send">Send It →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-sig">Computyshan©2026</span>
+  <span class="footer-txt">No templates. Ever.</span>
+</footer>
+
+<div class="sell-out-container">
+  <button id="revert-btn" class="sell-out-btn">Sell Out (Return to Corporate)</button>
+</div>
+
+<script src="PKP_Essentials/script.js" defer></script>
+</body>
+</html>
