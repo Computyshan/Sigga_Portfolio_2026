@@ -103,7 +103,9 @@ function handleSubmit(e) {
   const playlist = [
     { src: 'Assets/bg.mp3', title: 'BG TRACK 1' },
     { src: 'Assets/The_Rock_Show.mp3', title: 'TRACK 2' },
-    { src: 'Assets/She_Wants_to_be_me.mp3', title: 'TRACK 3' },
+    { src: 'Assets/Im_Not_Okay_I_Promise.mp3', title: 'TRACK 3' },
+    { src: 'Assets/She_Wants_to_be_me.mp3', title: 'TRACK 4' },
+    { src: 'Assets/Faint.mp3', title: 'TRACK 5' },
   ];
   let trackIndex = 0;
 
