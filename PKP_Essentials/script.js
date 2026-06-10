@@ -304,7 +304,7 @@ revertBtn.addEventListener('click', () => {
     { theme: '',           label: 'BLINK-182 — TOYPAJ'                        },
     { theme: 'mcr',        label: 'MCR — Three Cheers for Sweet Revenge'       },
     { theme: 'bfs',        label: 'Bowling for Soup — Drunk Enough to Dance'   },
-    { theme: 'simpleplan', label: 'Simple Plan — Self-Titled'                  },
+    { theme: 'linkinpark', label: 'Linkin Park — Meteora'                    },
     { theme: 'avril lavigne',  label: 'Avril Lavigne — Goodbye Lullaby'             },
     { theme: 'greenday2',  label: 'Green Day — TRÉ!'                        },
   ];

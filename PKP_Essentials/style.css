@@ -36,17 +36,18 @@
   --white:  #0d0c0b;
 }
 
-/* ── SIMPLE PLAN — Self-Titled ── */
-[data-theme="simpleplan"] {
-  --paper:  #1e282d;
-  --paper2: #2a3a40;
-  --ink:    #d4dbd7;
-  --red:    #9f5e46;
-  --orange: #73a4a6;
-  --green:  #487172;
-  --blue:   #3f86a3;
-  --white:  #111b1e;
+/* ── LINKIN PARK — Meteora ── */
+[data-theme="linkinpark"] {
+  --paper:   #0f1113; 
+  --paper2:  #1a282f; 
+  --ink:     #ffffff;  
+  --red:     #9c1a20;  
+  --orange:  #d56c30;  
+  --green:   #3d4a41;  
+  --blue:    #00868e;  
+  --white:   #060708;  
 }
+
 
 /* ── AVRIL LAVIGNE — Goodbye Lullaby ── */
 [data-theme="avril lavigne"] {
