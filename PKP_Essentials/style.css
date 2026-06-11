@@ -37,15 +37,16 @@
 }
 
 /* ── LINKIN PARK — Meteora ── */
+/* ── LINKIN PARK — Meteora 20th Anniversary ── */
 [data-theme="linkinpark"] {
-  --paper:   #0f1113; 
-  --paper2:  #1a282f; 
-  --ink:     #ffffff;  
-  --green:   #3d4a41;
-  --blue:    #00868e;
-  --red:     #9c1a20; 
-  --orange:  #d56c30;   
-  --white:   #060708;  
+  --paper:  #071610;
+  --paper2: #0c2420;
+  --ink:    #adced4;
+  --red:    #c44a1a;
+  --orange: #6eac53;
+  --blue:   #098aa6;
+  --green:  #0c6d73;
+  --white:  #040e0b;
 }
 
 
