@@ -98,14 +98,15 @@ function handleSubmit(e) {
   const audio      = document.getElementById('bg-audio');
   const nextBtn    = document.getElementById('vinyl-next');
   const trackLabel = document.getElementById('vinyl-track-label');
+  const vinylImg   = document.getElementById('vinyl-label-image');
 
   // ── PLAYLIST — add your .mp3 filenames here later ──
   const playlist = [
-    { src: 'Assets/bg.mp3', title: 'BG TRACK 1' },
-    { src: 'Assets/The_Rock_Show.mp3', title: 'TRACK 2' },
-    { src: 'Assets/Im_Not_Okay_I_Promise.mp3', title: 'TRACK 3' },
-    { src: 'Assets/She_Wants_to_be_me.mp3', title: 'TRACK 4' },
-    { src: 'Assets/Faint.mp3', title: 'TRACK 5' },
+    { src: 'Assets/bg.mp3', title: 'INTO YOU', img: 'Assets/Images/ZH_MFZB.jpg' },
+    { src: 'Assets/The_Rock_Show.mp3', title: 'THE ROCK SHOW', img: 'Assets/Images/BL182_TOPJ.jpg' },
+    { src: 'Assets/Im_Not_Okay_I_Promise.mp3', title: "I'M NOT OKAY (I PROMISE)", img: 'Assets/Images/MCR_TC.jpg' },
+    { src: 'Assets/She_Wants_to_be_me.mp3', title: 'SHE WANTS TO BE ME', img: 'Assets/Images/BUSTED_APFE.jpg' },
+    { src: 'Assets/Faint.mp3', title: 'FAINT', img: 'Assets/Images/LP_M.jpg' },
   ];
   let trackIndex = 0;
 
@@ -114,13 +115,17 @@ function handleSubmit(e) {
     audio.src = track.src;
     audio.load();
     if (trackLabel) trackLabel.textContent = track.title;
+    if (vinylImg) vinylImg.setAttribute('href', track.img);
     if (autoplay) {
       audio.play().then(syncVinylMuteState).catch(() => {});
     }
   }
 
   function nextTrack() {
-    trackIndex = (trackIndex + 1) % playlist.length;
+    // Shuffle logic: pick a random track that isn't the current one
+    let availableIndices = playlist.map((_, i) => i).filter(i => i !== trackIndex);
+    trackIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    
     loadTrack(trackIndex, true);
     // Flash the record red on skip
     const svg = nav.querySelector('.vinyl-svg');
@@ -135,8 +140,9 @@ function handleSubmit(e) {
     if (playlist.length > 1) nextTrack();
   });
 
-  // Set initial label
+  // Set initial track state
   if (trackLabel) trackLabel.textContent = playlist[0].title;
+  if (vinylImg)   vinylImg.setAttribute('href', playlist[0].img);
 
   function showLink(idx) {
     order.forEach((sel, i) => {
@@ -303,7 +309,7 @@ revertBtn.addEventListener('click', () => {
   const palettes = [
     { theme: '',           label: 'BLINK-182 — TOYPAJ'                        },
     { theme: 'mcr',        label: 'MCR — Three Cheers for Sweet Revenge'       },
-    { theme: 'bfs',        label: 'Bowling for Soup — Drunk Enough to Dance'   },
+    { theme: 'busted', label: 'Busted — A Present for Everyone' },
     { theme: 'linkinpark', label: 'Linkin Park — Meteora'                    },
     { theme: 'avril lavigne',  label: 'Avril Lavigne — Goodbye Lullaby'             },
     { theme: 'greenday2',  label: 'Green Day — TRÉ!'                        },

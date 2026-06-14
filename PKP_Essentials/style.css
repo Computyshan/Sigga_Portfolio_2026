@@ -24,16 +24,16 @@
   --white:  #060a0d;
 }
 
-/* ── BOWLING FOR SOUP — Drunk Enough to Dance ── */
-[data-theme="bfs"] {
-  --paper:  #1a1816;
-  --paper2: #2a2420;
-  --ink:    #c3cfcf;
-  --red:    #b0634f;
-  --orange: #439ab0;
-  --green:  #6b8690;
-  --blue:   #437590;
-  --white:  #0d0c0b;
+/* ── BUSTED — A Present for Everyone ── */
+[data-theme="busted"] {
+  --paper:  #1a1012;
+  --paper2: #2a1a1c;
+  --ink:    #d6bcb1;
+  --red:    #d5202b;
+  --orange: #a62628;
+  --green:  #406464;
+  --blue:   #918998;
+  --white:  #232326;
 }
 
 /* ── LINKIN PARK — Meteora ── */
