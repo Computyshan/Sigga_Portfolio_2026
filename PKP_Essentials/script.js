@@ -30,28 +30,19 @@
   }
 
   // ── Attempt 1: fire immediately on script execution (t=0)
-  // Works when the page was reached via a user click (e.g. from corporate page)
+  // This works because the seamless transition preserves the User Gesture.
   audio.play().then(markPlaying).catch(() => {
-    // ── Attempt 2: try again the moment the DOM is fully ready
-    // Sometimes helps on mobile where the audio element needs
-    // the full document to be parsed before play() works
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        audio.play().then(markPlaying).catch(markBlocked);
-      }, { once: true });
-    } else {
-      markBlocked();
-    }
-  });
-
-  // ── Fallback: first touch/click anywhere on the intro overlay
-  if (overlay) {
-    overlay.addEventListener('pointerdown', () => {
-      if (started) return;
-      audio.currentTime = 0;
+    // ── Attempt 2: try again on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
       audio.play().then(markPlaying).catch(markBlocked);
     }, { once: true });
-  }
+  });
+
+  // ── Global robust fallback: any click on the document starts the audio if blocked
+  window.addEventListener('mousedown', () => {
+    if (started) return;
+    audio.play().then(markPlaying).catch(markBlocked);
+  }, { once: true });
 
   // ── Toggle button: start if not yet started, otherwise mute/unmute
   toggleBtn.addEventListener('click', () => {
@@ -104,10 +95,10 @@ function handleSubmit(e) {
 
   // ── UNIFIED THEME-SONG PAIRING CONFIGURATION ──
   const playlist = [
-    { theme: '',              label: 'BLINK-182 — TOYPAJ',                   src: 'Assets/The_Rock_Show.mp3',            title: 'THE ROCK SHOW',                  img: 'Assets/Images/BL182_TOPJ.jpg' },
-    { theme: 'zebrahead',     label: 'Zebrahead — MFZB',                     src: 'Assets/bg.mp3',                       title: 'INTO YOU',                      img: 'Assets/Images/ZH_MFZB.jpg' },
-    { theme: 'mcr',           label: 'MCR — Three Cheers for Sweet Revenge',  src: 'Assets/Im_Not_Okay_I_Promise.mp3',    title: "I'M NOT OKAY (I PROMISE)",      img: 'Assets/Images/MCR_TC.jpg' },
     { theme: 'busted',        label: 'Busted — A Present for Everyone',      src: 'Assets/She_Wants_to_be_me.mp3',       title: 'SHE WANTS TO BE ME',             img: 'Assets/Images/BUSTED_APFE.jpg' },
+    { theme: 'zebrahead',     label: 'Zebrahead — MFZB',                     src: 'Assets/bg.mp3',                       title: 'INTO YOU',                      img: 'Assets/Images/ZH_MFZB.jpg' },
+    { theme: '',              label: 'BLINK-182 — TOYPAJ',                   src: 'Assets/First_Date.mp3',            title: 'FIRST DATE',                  img: 'Assets/Images/BL182_TOPJ.jpg' },
+    { theme: 'mcr',           label: 'MCR — Three Cheers for Sweet Revenge',  src: 'Assets/Im_Not_Okay_I_Promise.mp3',    title: "I'M NOT OKAY (I PROMISE)",      img: 'Assets/Images/MCR_TC.jpg' },
     { theme: 'linkinpark',    label: 'Linkin Park — Meteora',                src: 'Assets/Faint.mp3',                    title: 'FAINT',                         img: 'Assets/Images/LP_M.jpg' },
     { theme: 'avril lavigne', label: 'Avril Lavigne — Goodbye Lullaby',      src: 'Assets/Avril_Lavigne.mp3',            title: 'AVRIL LAVIGNE SONG',            img: 'Assets/Images/alt_bg.jpg' },
     { theme: 'greenday2',     label: 'Green Day — TRÉ!',                     src: 'Assets/Green_Day.mp3',                title: 'GREEN DAY SONG',                img: 'Assets/Images/alt_bg.jpg' },

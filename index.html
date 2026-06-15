@@ -1142,11 +1142,30 @@
     // --- SYSTEM FAILURE EASTER EGG TRANSITION ---
     const triggerWord = document.getElementById('trigger');
 
-    triggerWord.addEventListener('click', () => {
+    triggerWord.addEventListener('click', async () => {
       document.body.classList.add('tearing-down');
-      setTimeout(() => {
-        window.location.href = 'Computyshan.html';
-      }, 1250);
+      
+      try {
+        // Pre-fetch the next page to have it ready in memory
+        const response = await fetch('Computyshan.html');
+        const html = await response.text();
+        
+        setTimeout(() => {
+          // document.write is the most reliable way to perform a "seamless" 
+          // transition that preserves the User Gesture flag for autoplay.
+          document.open();
+          document.write(html);
+          document.close();
+          
+          // Update URL in address bar to match target page and trigger randomization
+          history.pushState({ page: 'Computyshan' }, '', 'Computyshan.html?random=true');
+        }, 1250);
+      } catch (e) {
+        // Fallback to standard redirection if fetch fails
+        setTimeout(() => {
+          window.location.href = 'Computyshan.html';
+        }, 1250);
+      }
     });
   </script>
 </body>
