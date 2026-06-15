@@ -88,45 +88,136 @@ function handleSubmit(e) {
 }
 
 /* ══════════════════════════════════════
-   VINYL NAV CYCLE + MUTE + NEXT SONG
+   THEME + PLAYLIST UNIFIED MANAGER
    ══════════════════════════════════════ */
 (function() {
   const order = ['.v-about', '.v-work', '.v-contact'];
-  let current = 0;
+  let currentVinylLinkIndex = 0;
+  
   const nav        = document.querySelector('.vinyl-nav');
   const record     = document.querySelector('.vinyl-record');
   const audio      = document.getElementById('bg-audio');
   const nextBtn    = document.getElementById('vinyl-next');
   const trackLabel = document.getElementById('vinyl-track-label');
   const vinylImg   = document.getElementById('vinyl-label-image');
+  const triangle   = document.getElementById('palette-triangle');
 
-  // ── PLAYLIST — add your .mp3 filenames here later ──
+  // ── UNIFIED THEME-SONG PAIRING CONFIGURATION ──
   const playlist = [
-    { src: 'Assets/bg.mp3', title: 'INTO YOU', img: 'Assets/Images/ZH_MFZB.jpg' },
-    { src: 'Assets/The_Rock_Show.mp3', title: 'THE ROCK SHOW', img: 'Assets/Images/BL182_TOPJ.jpg' },
-    { src: 'Assets/Im_Not_Okay_I_Promise.mp3', title: "I'M NOT OKAY (I PROMISE)", img: 'Assets/Images/MCR_TC.jpg' },
-    { src: 'Assets/She_Wants_to_be_me.mp3', title: 'SHE WANTS TO BE ME', img: 'Assets/Images/BUSTED_APFE.jpg' },
-    { src: 'Assets/Faint.mp3', title: 'FAINT', img: 'Assets/Images/LP_M.jpg' },
+    { theme: '',              label: 'BLINK-182 — TOYPAJ',                   src: 'Assets/The_Rock_Show.mp3',            title: 'THE ROCK SHOW',                  img: 'Assets/Images/BL182_TOPJ.jpg' },
+    { theme: 'zebrahead',     label: 'Zebrahead — MFZB',                     src: 'Assets/bg.mp3',                       title: 'INTO YOU',                      img: 'Assets/Images/ZH_MFZB.jpg' },
+    { theme: 'mcr',           label: 'MCR — Three Cheers for Sweet Revenge',  src: 'Assets/Im_Not_Okay_I_Promise.mp3',    title: "I'M NOT OKAY (I PROMISE)",      img: 'Assets/Images/MCR_TC.jpg' },
+    { theme: 'busted',        label: 'Busted — A Present for Everyone',      src: 'Assets/She_Wants_to_be_me.mp3',       title: 'SHE WANTS TO BE ME',             img: 'Assets/Images/BUSTED_APFE.jpg' },
+    { theme: 'linkinpark',    label: 'Linkin Park — Meteora',                src: 'Assets/Faint.mp3',                    title: 'FAINT',                         img: 'Assets/Images/LP_M.jpg' },
+    { theme: 'avril lavigne', label: 'Avril Lavigne — Goodbye Lullaby',      src: 'Assets/Avril_Lavigne.mp3',            title: 'AVRIL LAVIGNE SONG',            img: 'Assets/Images/alt_bg.jpg' },
+    { theme: 'greenday2',     label: 'Green Day — TRÉ!',                     src: 'Assets/Green_Day.mp3',                title: 'GREEN DAY SONG',                img: 'Assets/Images/alt_bg.jpg' },
+    // ── BLANK TEMPLATE FOR USER TO ADD MORE PAIRS LATER ──
+    { theme: 'template',      label: 'Band — Album Name',                     src: 'Assets/Template.mp3',                 title: 'TEMPLATE TITLE',                img: 'Assets/Images/alt_bg.jpg' }
   ];
+  
   let trackIndex = 0;
 
-  function loadTrack(idx, autoplay) {
-    const track = playlist[idx];
-    audio.src = track.src;
-    audio.load();
-    if (trackLabel) trackLabel.textContent = track.title;
-    if (vinylImg) vinylImg.setAttribute('href', track.img);
-    if (autoplay) {
-      audio.play().then(syncVinylMuteState).catch(() => {});
+  // Determine initial track index (randomized if coming from index.html)
+  const urlParams = new URLSearchParams(window.location.search);
+  const forceRandom = urlParams.get('random') === 'true';
+  const cameFromIndex = (document.referrer && document.referrer.includes('index.html')) || forceRandom;
+  if (cameFromIndex) {
+    // Pick a random track from active ones (non-templates) to prevent loading error placeholders
+    const activeIndices = playlist
+      .map((t, i) => ({ src: t.src, idx: i }))
+      .filter(t => !t.src.includes('Template.mp3') && !t.src.includes('Avril_Lavigne.mp3') && !t.src.includes('Green_Day.mp3'))
+      .map(t => t.idx);
+    
+    if (activeIndices.length > 0) {
+      trackIndex = activeIndices[Math.floor(Math.random() * activeIndices.length)];
     }
   }
 
+  // Function to apply the theme and trigger the physical swap effects
+  function applyTheme(themeName, triggerTransition = true) {
+    // 1. Swap data-theme attribute on document element
+    if (themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+
+    // 2. Trigger the premium theme-specific physical screen shake & flash transition
+    if (triggerTransition) {
+      triggerThemeTransition(themeName);
+    }
+  }
+
+  // Helper to trigger custom transitions per theme
+  function triggerThemeTransition(themeName) {
+    // Clear previous classes
+    document.body.classList.remove('theme-swapping');
+    document.body.classList.forEach(className => {
+      if (className.startsWith('swap-active-')) {
+        document.body.classList.remove(className);
+      }
+    });
+
+    // Determine the animation suffix class
+    let suffix = 'blink';
+    if (themeName === 'mcr') suffix = 'mcr';
+    else if (themeName === 'linkinpark') suffix = 'linkinpark';
+    else if (themeName === 'busted') suffix = 'busted';
+    else if (themeName === 'zebrahead') suffix = 'zebrahead';
+    else if (themeName === 'avril lavigne') suffix = 'avril-lavigne';
+    else if (themeName === 'greenday2') suffix = 'greenday2';
+    else if (themeName === '') suffix = 'blink';
+    else suffix = 'blink'; // default fallback for templates or others
+
+    // Force DOM reflow to restart animation
+    void document.body.offsetWidth;
+
+    // Trigger physical shake animation & color-specific overlay flash
+    document.body.classList.add('theme-swapping');
+    document.body.classList.add(`swap-active-${suffix}`);
+
+    // Clean up animation classes once transition is complete (800ms)
+    setTimeout(() => {
+      document.body.classList.remove('theme-swapping');
+      document.body.classList.remove(`swap-active-${suffix}`);
+    }, 800);
+  }
+
+  function loadTrack(idx, autoplay) {
+    const track = playlist[idx];
+    if (!track) return;
+    
+    // Set audio source
+    audio.src = track.src;
+    audio.load();
+    
+    // Update labels and vinyl covers
+    if (trackLabel) trackLabel.textContent = track.title;
+    if (vinylImg) vinylImg.setAttribute('href', track.img);
+    
+    // Update theme to match the song (only trigger transitions if active play/swap)
+    applyTheme(track.theme, autoplay);
+    
+    // Sync the palette triangle's tooltip/title
+    if (triangle) {
+      triangle.title = track.label;
+    }
+
+    if (autoplay) {
+      audio.play().then(syncVinylMuteState).catch((err) => {
+        console.warn("Autoplay failed or audio not loaded:", err);
+      });
+    }
+  }
+
+  // Skip to next track
   function nextTrack() {
     // Shuffle logic: pick a random track that isn't the current one
     let availableIndices = playlist.map((_, i) => i).filter(i => i !== trackIndex);
     trackIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
     
     loadTrack(trackIndex, true);
+    
     // Flash the record red on skip
     const svg = nav.querySelector('.vinyl-svg');
     if (svg) {
@@ -135,14 +226,25 @@ function handleSubmit(e) {
     }
   }
 
-  // Auto-advance when a track ends (only meaningful with multiple tracks)
+  // Handle audio error (e.g. if the user hasn't replaced a template file yet)
+  if (audio) {
+    audio.addEventListener('error', (e) => {
+      console.warn("Audio file failed to load:", audio.src);
+      if (trackLabel) {
+        trackLabel.textContent = `[MISSING: ${playlist[trackIndex].title}]`;
+      }
+    });
+  }
+
+  // Auto-advance when track ends
   audio.addEventListener('ended', () => {
     if (playlist.length > 1) nextTrack();
   });
 
-  // Set initial track state
-  if (trackLabel) trackLabel.textContent = playlist[0].title;
-  if (vinylImg)   vinylImg.setAttribute('href', playlist[0].img);
+  // Set initial track state (attempt autoplay if coming from index.html)
+  if (playlist.length > 0) {
+    loadTrack(trackIndex, cameFromIndex);
+  }
 
   function showLink(idx) {
     order.forEach((sel, i) => {
@@ -172,8 +274,8 @@ function handleSubmit(e) {
         syncVinylMuteState();
       }
     } else {
-      current = (current + 1) % order.length;
-      showLink(current);
+      currentVinylLinkIndex = (currentVinylLinkIndex + 1) % order.length;
+      showLink(currentVinylLinkIndex);
     }
   });
 
@@ -188,8 +290,26 @@ function handleSubmit(e) {
     audio.addEventListener('volumechange', syncVinylMuteState);
   }
 
-  record.style.cursor = 'pointer';
-  nav.style.cursor    = 'pointer';
+  if (record) record.style.cursor = 'pointer';
+  if (nav) nav.style.cursor    = 'pointer';
+
+  // ── PALETTE CYCLE — nav triangle click ──
+  if (triangle) {
+    function cycleTheme() {
+      // Advance to next track (which will trigger loadTrack and apply the theme)
+      trackIndex = (trackIndex + 1) % playlist.length;
+      loadTrack(trackIndex, true);
+
+      // Flashing animation on the triangle
+      triangle.classList.remove('palette-flash');
+      void triangle.offsetWidth;
+      triangle.classList.add('palette-flash');
+      triangle.addEventListener('animationend', () => triangle.classList.remove('palette-flash'), { once: true });
+    }
+
+    triangle.addEventListener('click', cycleTheme);
+    triangle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') cycleTheme(); });
+  }
 
   syncVinylMuteState();
 })();
@@ -296,45 +416,9 @@ revertBtn.addEventListener('click', () => {
     el.style.transform  = `translate(${xDist}vw, ${yDist}vh) rotate(${rotation}deg) scale(${scale})`;
     el.style.opacity    = '0';
   });
-  setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1500);
 });
 
-/* ══════════════════════════════════════
-   PALETTE CYCLE — nav triangle click
-   ══════════════════════════════════════ */
-(function() {
-  const triangle = document.getElementById('palette-triangle');
-  if (!triangle) return;
-
-  const palettes = [
-    { theme: '',           label: 'BLINK-182 — TOYPAJ'                        },
-    { theme: 'mcr',        label: 'MCR — Three Cheers for Sweet Revenge'       },
-    { theme: 'busted', label: 'Busted — A Present for Everyone' },
-    { theme: 'linkinpark', label: 'Linkin Park — Meteora'                    },
-    { theme: 'avril lavigne',  label: 'Avril Lavigne — Goodbye Lullaby'             },
-    { theme: 'greenday2',  label: 'Green Day — TRÉ!'                        },
-  ];
-  let current = 0;
-
-  function cycle() {
-    current = (current + 1) % palettes.length;
-    const p = palettes[current];
-
-    if (p.theme) {
-      document.documentElement.setAttribute('data-theme', p.theme);
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-
-    // Update tooltip so user knows which palette is active
-    triangle.title = p.label;
-
-    triangle.classList.remove('palette-flash');
-    void triangle.offsetWidth;
-    triangle.classList.add('palette-flash');
-    triangle.addEventListener('animationend', () => triangle.classList.remove('palette-flash'), { once: true });
-  }
-
-  triangle.addEventListener('click', cycle);
-  triangle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') cycle(); });
-})();
+/* Palette Cycle has been unified with the Vinyl Audio Player in the manager above to keep themes and tracks 100% in sync */;
