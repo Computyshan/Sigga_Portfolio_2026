@@ -96,12 +96,12 @@ function handleSubmit(e) {
   // ── UNIFIED THEME-SONG PAIRING CONFIGURATION ──
   const playlist = [
     { theme: 'busted',        label: 'Busted — A Present for Everyone',      src: 'Assets/She_Wants_to_be_me.mp3',       title: 'SHE WANTS TO BE ME',             img: 'Assets/Images/BUSTED_APFE.jpg' },
-    { theme: 'zebrahead',     label: 'Zebrahead — MFZB',                     src: 'Assets/bg.mp3',                       title: 'INTO YOU',                      img: 'Assets/Images/ZH_MFZB.jpg' },
+    { theme: 'zebrahead',     label: 'Zebrahead — MFZB',                     src: 'Assets/Into_You.mp3',                       title: 'INTO YOU',                      img: 'Assets/Images/ZH_MFZB.jpg' },
     { theme: '',              label: 'BLINK-182 — TOYPAJ',                   src: 'Assets/First_Date.mp3',            title: 'FIRST DATE',                  img: 'Assets/Images/BL182_TOPJ.jpg' },
     { theme: 'mcr',           label: 'MCR — Three Cheers for Sweet Revenge',  src: 'Assets/Im_Not_Okay_I_Promise.mp3',    title: "I'M NOT OKAY (I PROMISE)",      img: 'Assets/Images/MCR_TC.jpg' },
     { theme: 'linkinpark',    label: 'Linkin Park — Meteora',                src: 'Assets/Faint.mp3',                    title: 'FAINT',                         img: 'Assets/Images/LP_M.jpg' },
-    { theme: 'avril lavigne', label: 'Avril Lavigne — Goodbye Lullaby',      src: 'Assets/Avril_Lavigne.mp3',            title: 'AVRIL LAVIGNE SONG',            img: 'Assets/Images/alt_bg.jpg' },
-    { theme: 'greenday2',     label: 'Green Day — TRÉ!',                     src: 'Assets/Green_Day.mp3',                title: 'GREEN DAY SONG',                img: 'Assets/Images/alt_bg.jpg' },
+    { theme: 'avril lavigne', label: 'Avril Lavigne — Goodbye Lullaby',      src: 'Assets/Smile.mp3',            title: 'SMILE',            img: 'Assets/Images/AL_GL.webp' },
+    { theme: 'greenday2',     label: 'Green Day — TRÉ!',                     src: 'Assets/Sex_Drugs_Violence.mp3',                title: 'SDV',                img: 'Assets/Images/GD_T!.jpg' },
     // ── BLANK TEMPLATE FOR USER TO ADD MORE PAIRS LATER ──
     { theme: 'template',      label: 'Band — Album Name',                     src: 'Assets/Template.mp3',                 title: 'TEMPLATE TITLE',                img: 'Assets/Images/alt_bg.jpg' }
   ];
