@@ -1151,6 +1151,11 @@
         const html = await response.text();
         
         setTimeout(() => {
+          // Force a dark background on the existing document to hide any white flash
+          // during the handoff to the new document.
+          document.documentElement.style.backgroundColor = '#000000';
+          document.body.style.backgroundColor = '#000000';
+
           // document.write is the most reliable way to perform a "seamless" 
           // transition that preserves the User Gesture flag for autoplay.
           document.open();
