@@ -94,6 +94,21 @@
   --white:  #0a0a12;
 }
 
+/* ── ALL TIME LOW — Nothing Personal ── */
+[data-theme="alltimelow"] {
+  --paper:  #1e1b18;
+  --paper2: #2a2625;
+  --ink:    #e8e3e9;
+  --red:    #7c475d;
+  --orange: #c1b388;
+  --green:  #8c7432;
+  --blue:   #a0736c;
+  --white:  #141210;
+}
+
+
+
+
 /* Smooth theme transition for all color-changing components */
 body, header, section, footer, nav, .btn, .proj-card, .stamp, .sticker-pin, .vinyl-nav, input, textarea, a, .section-title, .nav-stamp, .r-letter {
   transition: background-color 0.6s cubic-bezier(0.25, 1, 0.5, 1),

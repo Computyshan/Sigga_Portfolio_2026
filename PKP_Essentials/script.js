@@ -103,7 +103,7 @@ function handleSubmit(e) {
     { theme: 'avril lavigne', label: 'Avril Lavigne — Goodbye Lullaby',      src: 'Assets/Smile.mp3',            title: 'SMILE',            img: 'Assets/Images/AL_GL.webp' },
     { theme: 'greenday2',     label: 'Green Day — TRÉ!',                     src: 'Assets/Sex_Drugs_Violence.mp3',                title: 'SDV',                img: 'Assets/Images/GD_T!.jpg' },
     // ── BLANK TEMPLATE FOR USER TO ADD MORE PAIRS LATER ──
-    { theme: 'template',      label: 'Band — Album Name',                     src: 'Assets/Template.mp3',                 title: 'TEMPLATE TITLE',                img: 'Assets/Images/alt_bg.jpg' }
+    { theme: 'alltimelow',      label: 'All Time Low — Nothing Personal',     src: 'Assets/Break_Your_Little_Heart.mp3',                 title: 'BREAK YOUR LITTLE HEART',                img: 'Assets/Images/ATL_NP.jpg' }
   ];
   
   let trackIndex = 0;
