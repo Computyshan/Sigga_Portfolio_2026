@@ -157,6 +157,7 @@ function handleSubmit(e) {
     else if (themeName === 'zebrahead') suffix = 'zebrahead';
     else if (themeName === 'avril lavigne') suffix = 'avril-lavigne';
     else if (themeName === 'greenday2') suffix = 'greenday2';
+    else if (themeName === 'alltimelow') suffix = 'alltimelow';
     else if (themeName === '') suffix = 'blink';
     else suffix = 'blink'; // default fallback for templates or others
 
